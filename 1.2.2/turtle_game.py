@@ -1,6 +1,8 @@
+#1.2.2 File
 #-----import statements-----
 import turtle as trtl
 import random as rand
+import leaderboard as lb
 
 #-----game configuration----
 spot_color = "purple"
@@ -13,6 +15,10 @@ timer_up = False
 
 bg_color = "lightblue"
 #-----initialize turtle-----
+leaderboard_file_name = "a122_leaderboard.txt"
+player_name = input("What is your name?")
+
+
 counter =  trtl.Turtle()
 # Score turtle
 score_writer = trtl.Turtle()
@@ -33,7 +39,7 @@ meowl.penup()
 colors = ["red", "maroon", "pink", "purple", "white", "blue", "yellow"]
 
 #list of sizes for the shape
-sizes = [1, 2, 3, 4, 5, 5.5, 6] # Smallest size recommended is 0.5
+sizes = [2, 2.5, 3, 4, 5, 5.5, 6]
 
 #-----game functions--------
 # Draw the box for the score
@@ -83,7 +89,7 @@ def counter_setup():
   counter.forward(332)
   counter.right(90)
   counter.hideturtle()
-
+meowl.speed(0)
 #start countdown and update
 def countdown():
   global timer, timer_up
@@ -107,6 +113,26 @@ def change_size_randomly(turtle_instance, size_list):
     new_size = rand.choice(size_list)
     turtle_instance.shapesize(new_size)
 
+# CODE TO ADD
+# Add this function to your game code
+
+# manages the leaderboard for top 5 scorers
+def manage_leaderboard():
+
+  global score
+  global meowl
+
+  # get the names and scores from the leaderboard file
+  leader_names_list = lb.get_names(leaderboard_file_name)
+  leader_scores_list = lb.get_scores(leaderboard_file_name)
+
+  # show the leaderboard with or without the current player
+  if (len(leader_scores_list) < 5 or score >= leader_scores_list[4]):
+    lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
+    lb.draw_leaderboard(True, leader_names_list, leader_scores_list, meowl, score)
+
+  else:
+    lb.draw_leaderboard(False, leader_names_list, leader_scores_list, meowl, score)
 
 #-----events----------------
 meowl.onclick(spot_clicked)
