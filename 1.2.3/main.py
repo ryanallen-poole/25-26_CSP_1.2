@@ -1,53 +1,61 @@
 import turtle as trtl
 import random as rand
-from operator import index
 
 apple_image = "apple.gif" # Store the file name of your shape
-ground_height = -200
-apple_letter_x_offset = -25
+ground_height = -200 #location of ground
+apple_letter_x_offset = -25 #horizontal offset
 apple_letter_y_offset = -50
-for i in range(0, number_of_apples):
 current_letter = "a"
+screen_width =400
+screen_height = 400
+
 wn = trtl.Screen()
 wn.setup(width=1.0, height=1.0)
 wn.addshape(apple_image) # Make the screen aware of the new file
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-alphabet_list = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-def reset_aple(active apple:
-#gen rand num -> pop that index
-#the letter as pop, becomes the letter on the table
-global current_letter
-
-length_of_list = len(letters)
-if length_of_list == 0:
-    rand.rabdint(0,length_of_list)
-    current_letter = letters.pop(index)
-    draw_apple(active_apple, current_letter)
-
-len(letters)
-current_letter = letters.pop()
-import = rand.randint(0,len(letters))
 wn.bgpic("background.gif")
 apple = trtl.Turtle()
-def_draw_apple(active_apple, current_letter)
 wn.tracer(False)
-reset_apple
 apple.penup()
-current_letter
-draw_letter(current_letter)
+
+def reset_apple(active_apple):
+    # Generate a random number - > pop that index
+    # The letter we pop, becomes the letter on the apple
+    global current_letter
+    #how many letters left
+    length_of_list = len(letters)
+    #if we aren't out
+    if(length_of_list != 0):
+        index = rand.randint(0, length_of_list)
+        current_letter = letters.pop(index)
+        # Finish This First
+        active_apple.goto(rand.randint(-(screen_width)/2, (screen_width)/2),
+                          rand.randint(-(screen_height) / 2, (screen_height) / 2))
+        active_apple.goto(200,200)
+        draw_apple(active_apple, current_letter)
+
+
+
+
 # given a turtle, set that turtle to be shaped by the image file
 def draw_apple(active_apple):
+ def draw_apple(active_apple, current_letter):
   active_apple.shape(apple_image)
-  draw_letter("A", active_apple)
+  #draw_letter("A", active_apple)
+  #Show Turtle Here
+  active_apple.showturtle()
+  draw_letter(current_letter, active_apple)
+  wn.update()
 
 def drop_apple():
-    wn.tracer(True)
-    apple.goto(apple.xcor(), ground_height)
-    apple.clear()
-    apple.hideturtle()
-    wn.tracer(False)
-
+  wn.tracer(True)
+  apple.goto(apple.xcor(), ground_height)
+  apple.clear()
+  apple.hideturtle()
+  wn.tracer(False)
+  reset_apple(apple)
 
 def draw_letter(letter, active_apple):
   active_apple.color("white")
@@ -55,14 +63,21 @@ def draw_letter(letter, active_apple):
   active_apple.setpos(active_apple.xcor() + apple_letter_x_offset,active_apple.ycor() + apple_letter_y_offset)
   active_apple.write(letter, font=("Arial", 74, "bold"))
   active_apple.setpos(remember_position)
-#   a123_apple_and_letters.py
+
+
+draw_apple(apple, current_letter)
+
+
+#   a123_apple_letters.py
 #TODO Create a function that takes a turtle as its parameter and gives that turtle (apple)
-# a new location on the tree, only if the list of letters is not empty.
+# a new location on the tree, only if the list of letters is not empty. Associate the
+# turtle with a new letter selected at random from the list of letters
 
-#TODO Create a function that draws a new letter from the letter list.
+#TODO Create a function that takes a turtle (apple) and its corresponding letter from the letter
+# list and draws that letter on that turtle (apple)
 
-#TODO Create a function that takes a turtle (apple) as its parameter
-# and set that turtle to be shaped by the image file, call the letter drawing function,
+#TODO Create a function that takes a turtle (apple) and its corresponding ltter from the letter
+# list and set that turtle to be shaped by the image file, call the letter drawing function,
 # and update the Screen
 
 #TODO Iterate over the numbers from 0 to the number of apples, creating that many turtles
@@ -70,24 +85,23 @@ def draw_letter(letter, active_apple):
 # add the new apples to a list of apples to be used in the rest of the program.
 # The loop below executes the correct number of times by using the range() function
 # to create a list of numbers to iterate over.
-for i in range(0, number_of_apples):
-  #Your code here
 
-#TODO Create a function that takes a letter as its parameter, retrieve a
-# random turtle (apple) and causes the turtle (apple) to drop from the tree and the letter
-# to disappear. Call the apple reseting function.
+
+
+#TODO Create a function that takes a letter as its parameter, uses that letter to retrieve the
+# corresponding turtle (apple) and causes both to drop from the tree simultaneously. Once the
+# apple and letter have dropped, call the apple reseting function.
 
 #TODO define a function per letter that you will use in your program. Each function should check
-# to see if the given letter is in the list of letters; if it is, it should drop an apple at random.
+# to see if the given letter is in the list of letters; if it is, it should drop the corresponding
+# apple.
+
+
 
 #TODO use the onkeypress method of wn to correlate the functions you defined above with each
 # of the letters that the user might type.
 # onkeypress requires that you name one function that must take
 # no arguments to be called when the specified key is pressed.
-
-
-draw_apple(apple)
 wn.onkeypress(drop_apple, "a")
-rand.randint()
+
 wn.listen()
-trtl.mainloop()
