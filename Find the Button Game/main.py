@@ -26,7 +26,7 @@ button.color("grey")
 button.shapesize(0.2)  # Made larger for easier clicking
 button.goto(-381, -50)
 
-# Bind the click event to the button turtle
+# Bind the click event to the button turtle.
 button.onclick(change_background)
 
 wn.listen()
