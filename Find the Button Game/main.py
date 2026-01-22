@@ -17,12 +17,19 @@ score_writer.goto(200, 250) # Adjusted to fit standard screens
 score_writer.write(f"Score: {score}", font=font_setup)
 
 button_positions = [
-    (-381, -50),
-    (167, -59),
-    (20, 0),
-    (94.5, -15),
-    (10, -100),
-    (-200, 100)
+    (-381, -50), #1
+    (167, -59), #2
+    (20, 0), #3
+    (94.5, -15), #4
+    (10, -100), #5
+    (-200, 100), #6
+    (-237, -20), #7 added photos
+    (-135, 144), #8
+    (150, 50), #9
+    (200, -33), #10
+    (60, -75), #11
+    (-200, -100), #12
+    (-200, -100) #13
 ]
 
 
@@ -38,8 +45,8 @@ def change_background(x, y):
     global current_bg
     current_bg += 1
 
-    # Reset to 1 if we go past 6
-    if current_bg > 6:
+    # Reset to 1 if we go past 13
+    if current_bg > 13:
         current_bg = 1
 
     #update the background image
