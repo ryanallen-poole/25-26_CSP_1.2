@@ -1,4 +1,5 @@
 import turtle
+import random
 #variable setup
 score=0
 font_setup = ("Arial", 20, "bold")
@@ -40,7 +41,35 @@ def update_score():
     score_writer.clear()
     score_writer.write(f"Score: {score}", font=font_setup)
 
+
+def draw_confetti(amount, x_loc, y_loc):
+    # This function has PARAMETERS (amount, x_loc, y_loc)
+
+    # Setup a temporary turtle for effects
+    effect = turtle.Turtle()
+    effect.hideturtle()
+    effect.speed(0)
+    effect.penup()
+
+    # ITERATION (Loop) - Satisfies Row 5
+    for i in range(amount):
+        # SEQUENCING (Order of steps)
+        color_list = ["red", "blue", "green", "yellow", "purple"]
+
+        # SELECTION (If/Else) - Satisfies Row 5
+        if i % 2 == 0:
+            effect.color(random.choice(color_list))
+        else:
+            effect.color("orange")
+
+        effect.goto(x_loc + random.randint(-20, 20), y_loc + random.randint(-20, 20))
+        effect.dot(5)
+
+    effect.clear()  # Clean up
+
 def change_background(x, y):
+    draw_confetti(5, x, y)
+
     update_score()
     global current_bg
     current_bg += 1
