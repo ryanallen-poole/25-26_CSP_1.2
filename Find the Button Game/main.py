@@ -7,7 +7,6 @@ current_bg = 1
 
 # Screen setup
 wn = turtle.Screen()
-current_bg = 1
 wn.bgpic("background1.gif")
 
 #score writer setup
@@ -43,9 +42,8 @@ def update_score():
 
 
 def draw_confetti(amount, x_loc, y_loc):
-    # This function has PARAMETERS (amount, x_loc, y_loc)
 
-    # Setup a temporary turtle for effects
+    # Set up a temporary turtle for effects
     effect = turtle.Turtle()
     effect.hideturtle()
     effect.speed(0)
