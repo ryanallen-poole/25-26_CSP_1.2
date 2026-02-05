@@ -13,12 +13,12 @@ wn.bgpic("background1.gif")
 score_writer = turtle.Turtle()
 score_writer.hideturtle()
 score_writer.penup()
-score_writer.goto(200, 250) # Adjusted to fit standard screens
+score_writer.goto(200, 250)
 score_writer.write(f"Score: {score}", font=font_setup)
 
 button_positions = [
-    (-381, -50), #1
-    (167, -59), #2
+    (-381, -51), #1
+    (168, -59), #2
     (20, 0), #3
     (94.5, -15), #4
     (10, -100), #5
@@ -43,18 +43,18 @@ def update_score():
 
 def draw_confetti(amount, x_loc, y_loc):
 
-    # Set up a temporary turtle for effects
+    # Set up a temporary turtle for confetti
     effect = turtle.Turtle()
     effect.hideturtle()
     effect.speed(0)
     effect.penup()
 
-    # ITERATION (Loop) - Satisfies Row 5
+    #Add confetti (row 5)
     for i in range(amount):
-        # SEQUENCING (Order of steps)
+
         color_list = ["red", "blue", "green", "yellow", "purple"]
 
-        # SELECTION (If/Else) - Satisfies Row 5
+
         if i % 2 == 0:
             effect.color(random.choice(color_list))
         else:
@@ -63,7 +63,7 @@ def draw_confetti(amount, x_loc, y_loc):
         effect.goto(x_loc + random.randint(-20, 20), y_loc + random.randint(-20, 20))
         effect.dot(5)
 
-    effect.clear()  # Clean up
+    effect.clear()  #Clear confetti for next round
 
 def change_background(x, y):
     draw_confetti(5, x, y)
@@ -72,7 +72,7 @@ def change_background(x, y):
     global current_bg
     current_bg += 1
 
-    # Reset to 1 if we go past 13
+    # Reset to 1 if player goes past 13
     if current_bg > 13:
         current_bg = 1
 
@@ -93,7 +93,7 @@ button = turtle.Turtle()
 button.shape("square")
 button.penup()
 button.color("grey")
-button.shapesize(0.2)  # Made larger for easier clicking
+button.shapesize(0.1)
 button.goto(button_positions[0])
 
 # Bind click event to the button turtle
