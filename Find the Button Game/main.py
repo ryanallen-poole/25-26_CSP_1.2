@@ -16,6 +16,11 @@ score_writer.penup()
 score_writer.goto(200, 250)
 score_writer.write(f"Score: {score}", font=font_setup)
 
+timer = 200
+counter_interval = 1000   #1000 represents 1 second
+timer_up = False
+turtle.hideturtle()
+
 button_positions = [
     (-381, -51), #1
     (168, -59), #2
@@ -23,7 +28,7 @@ button_positions = [
     (94.5, -15), #4
     (10, -100), #5
     (-200, 100), #6
-    (-237, -20), #7 added photos
+    (-237, -20), #7 new photos
     (-135, 144), #8
     (150, 50), #9
     (200, -33), #10
@@ -32,13 +37,35 @@ button_positions = [
     (-900, -100) #13
 ]
 
-
-# Tracking function
+#score
 def update_score():
     global score
     score += 1
     score_writer.clear()
     score_writer.write(f"Score: {score}", font=font_setup)
+
+counter =  turtle.Turtle()
+
+def counter_setup():
+  counter.pendown()
+  counter.forward(-300)
+  counter.left(90)
+  counter.forward(250)
+  counter.right(90)
+  counter.hideturtle()
+turtle.speed(0)
+#start countdown and update
+def countdown():
+  global timer, timer_up
+  counter.clear()
+  if timer <= 0:
+    counter.write("Time's Up", font=font_setup)
+    timer_up = True
+
+  else:
+    counter.write("Timer: " + str(timer), font=font_setup)
+    timer -= 1
+    counter.getscreen().ontimer(countdown, counter_interval)
 
 
 def draw_confetti(amount, x_loc, y_loc):
@@ -98,6 +125,7 @@ button.goto(button_positions[0])
 
 # Bind click event to the button turtle
 button.onclick(change_background)
-
+wn.ontimer(countdown, counter_interval)
+counter_setup()
 wn.listen()
 wn.mainloop()
